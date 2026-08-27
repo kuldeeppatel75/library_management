@@ -1,0 +1,50 @@
+/* Shrishti Library Professional Navbar Styling */
+.custom-navbar {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40) !important;
+    padding: 12px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.brand-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #00dbde, #fc00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    transition: transform 0.3s ease;
+}
+
+.brand-title:hover {
+    transform: scale(1.05);
+}
+
+.custom-nav-link {
+    color: #cfd8dc !important;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 6px;
+    padding: 8px 16px !important;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.custom-nav-link i {
+    margin-right: 6px;
+    transition: transform 0.3s ease;
+}
+
+.custom-nav-link:hover, .custom-nav-link.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 219, 222, 0.2);
+}
+
+.custom-nav-link:hover i {
+    transform: scale(1.2);
+    color: #00dbde;
+}
