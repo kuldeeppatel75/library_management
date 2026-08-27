@@ -1,0 +1,152 @@
+/* --- Ultra Pro Max Registration Page Styling --- */
+body {
+    background: radial-gradient(circle at top right, #121224, #080810);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* Smooth Entrance Pop Animation */
+@keyframes registerPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.register-container {
+    max-width: 650px;
+    margin: 40px auto 60px auto;
+    animation: registerPopIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.register-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.register-card::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, #00dbde, #fc00ff);
+    filter: blur(70px);
+    opacity: 0.25;
+    z-index: 1;
+}
+
+.register-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.register-title span {
+    background: linear-gradient(45deg, #00dbde, #fc00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.register-subtitle {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+.form-group-custom {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    color: #cbd5e1;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: #00dbde !important;
+    box-shadow: 0 0 15px rgba(0, 219, 222, 0.25) !important;
+    color: #ffffff !important;
+}
+
+/* Dropdown Options Styling Fix for Dark Mode */
+.form-select option {
+    background-color: #121224;
+    color: #ffffff;
+}
+
+.register-btn {
+    background: linear-gradient(45deg, #00dbde, #005f73);
+    border: none;
+    color: white;
+    padding: 14px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: 50px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 219, 222, 0.4);
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 219, 222, 0.6);
+    color: white;
+}
+/* Real-time Pro Validation Styles */
+.form-control.is-invalid, .form-select.is-invalid {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.25) !important;
+}
+
+.form-control.is-valid, .form-select.is-valid {
+    border-color: #00dbde !important;
+    box-shadow: 0 0 15px rgba(0, 219, 222, 0.25) !important;
+}
+
+.invalid-feedback-custom {
+    color: #ff4d4d;
+    font-size: 0.82rem;
+    margin-top: 5px;
+    font-weight: 500;
+    display: none;
+}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+<div class="container register-container">
+    <div class="register-card">
+        
+        <div class="register-header">
+            <h2 class="register-title">Member <span>Registration</span></h2>
+            <p class="register-subtitle">Join Shrishti Library ecosystem by filling out your details below.</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-md-6 form-group-custom">
+                    <label class="form-label"><i class="bi bi-person"></i> First Name</label>
+                    <input type="text" class="form-control" name="first_name" placeholder="Enter first name" required>
+                </div>
+
+                <div class="col-md-6 form-group-custom">
+                    <label class="form-label"><i class="bi bi-person-fill"></i> Last Name</label>
+                    <input type="text" class="form-control" name="last_name" placeholder="Enter last name" required>
+                </div>
+            </div>
+
+            <div class="form-group-custom">
+                <label class="form-label"><i class="bi bi-shield-shaded"></i> Father's Name</label>
+                <input type="text" class="form-control" name="father_name" placeholder="Enter father's full name" required>
+            </div>
+
+            <div class="form-group-custom">
+                <label class="form-label"><i class="bi bi-geo-alt"></i> Residential Address</label>
+                <textarea class="form-control" name="address" rows="2" placeholder="Enter your full address" required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group-custom">
+                    <label class="form-label"><i class="bi bi-telephone"></i> Mobile Number</label>
+                    <input type="tel" class="form-control" name="mobile" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="col-md-6 form-group-custom">
+                    <label class="form-label"><i class="bi bi-camera"></i> Passport Size Photo</label>
+                    <input type="file" class="form-control" name="photo" accept="image/*" required>
+                </div>
+            </div>
+
+            <div class="form-group-custom">
+                <label class="form-label"><i class="bi bi-clock-history"></i> Select Membership Duration & Pricing</label>
+                <select class="form-select" name="membership_plan" required>
+                    <option value="" selected disabled>-- Choose Your Plan --</option>
+                    <option value="4_hours">4 Hours / Day — ₹500 per month</option>
+                    <option value="8_hours">8 Hours / Day — ₹800 per month</option>
+                    <option value="12_hours">12 Hours / Day — ₹1000 per month</option>
+                    <option value="permanent">Permanent (24/7 Access) — ₹1600 per month</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-btn">
+                <i class="bi bi-check-circle-fill"></i> Complete Registration
+            </button>
+
+        </form>
+
+    </div>
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

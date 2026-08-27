@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 600px;">
+    <div class="p-4 bg-dark rounded-4 border border-secondary shadow-lg text-center">
+        <h2 class="text-white mb-3">Complete Your <span>Payment</span></h2>
+        <p class="text-muted">Scan the QR code below using any UPI app (GPay, PhonePe, Paytm)</p>
+        
+        <h3 class="text-info mb-4">Amount to Pay: ₹{{ amount }}</h3>
+        
+        <!-- Yahan apna QR code ki image static folder me rakh kar link kar dena -->
+        <div class="bg-white p-3 d-inline-block rounded-3 mb-4">
+            <img src="{% static 'images/qr_code.png' %}" alt="Library QR Code" style="width: 200px; height: 200px;">
+        </div>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3 text-start">
+                <label class="form-label text-light">Enter 12-Digit UTR / Transaction ID:</label>
+                <input type="text" class="form-control" name="utr_number" placeholder="e.g., 432105xxxxxx" required>
+                <small class="text-muted">Payment karne ke baad jo UPI Ref / UTR number milta hai yahan dalein.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
+                Submit UTR & Finish Registration
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
