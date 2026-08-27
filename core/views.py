@@ -102,3 +102,67 @@ def payment_view(request):
             return render(request, 'success_pending.html')
             
     return render(request, 'payment.html', {'amount': amount})
+
+from django.contrib.auth.hashers import make_password, check_password
+
+def login_view(request):
+    if request.method == 'POST':
+        mobile = request.POST.get('mobile')
+        password = request.POST.get('password')
+        
+        try:
+            member = MemberRegistration.objects.get(mobile=mobile)
+            
+            # Check karo ki admin ne approve kiya hai ya nahi
+            if not member.is_approved:
+                return render(request, 'login.html', {'error': 'Aapka registration abhi pending hai, admin approval ka wait karein.'})
+            
+            # Agar pehli baar login kar raha hai (password set nahi hai)
+            if not member.password:
+                request.session['setup_mobile'] = mobile
+                return redirect('setup_password')
+            
+            # Agar password pehle se hai toh match karo
+            if member.password and check_password(password, member.password):
+                request.session['member_id'] = member.id
+                return redirect('student_dashboard')
+            else:
+                return render(request, 'login.html', {'error': 'Galat mobile number ya password hai.'})
+                
+        except MemberRegistration.DoesNotExist:
+            return render(request, 'login.html', {'error': 'Yeh mobile number registered nahi hai.'})
+            
+    return render(request, 'login.html')
+
+def setup_password_view(request):
+    mobile = request.session.get('setup_mobile')
+    if not mobile:
+        return redirect('login')
+        
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        
+        if new_password == confirm_password:
+            member = MemberRegistration.objects.get(mobile=mobile)
+            member.password = make_password(new_password)  # Password ko secure hash karke save karega
+            member.save()
+            
+            # Session saaf karke seedha dashboard bhej do
+            if 'setup_mobile' in request.session:
+                del request.session['setup_mobile']
+            request.session['member_id'] = member.id
+            
+            return redirect('student_dashboard')
+        else:
+            return render(request, 'setup_password.html', {'error': 'Dono passwords match nahi ho rahe hain.'})
+            
+    return render(request, 'setup_password_view.html') # Note: file ka naam check kar lena niche diye steps ke hisab se
+
+def student_dashboard_view(request):
+    member_id = request.session.get('member_id')
+    if not member_id:
+        return redirect('login')
+        
+    member = MemberRegistration.objects.get(id=member_id)
+    return render(request, 'student_dashboard.html', {'member': member})

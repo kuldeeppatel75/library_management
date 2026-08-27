@@ -10,6 +10,7 @@ class MemberRegistration(models.Model):
     membership_plan = models.CharField(max_length=20) # 4_hours, 8_hours, etc.
     amount = models.IntegerField() # 500, 800, 1000, 1600
     utr_number = models.CharField(max_length=50, default="PENDING_UTR")
+    password = models.CharField(max_length=128, blank=True, null=True)
     is_approved = models.BooleanField(default=False) # Admin approve karega tab True hoga
     created_at = models.DateTimeField(auto_now_add=True)
 

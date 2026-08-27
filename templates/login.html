@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5" style="max-width: 450px;">
+    <div class="p-4 bg-dark rounded-4 border border-secondary shadow-lg text-white">
+        <h3 class="text-center mb-3">Student <span>Login</span></h3>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Registered Mobile Number</label>
+                <input type="text" class="form-control" name="mobile" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Pehli baar aa rahe hain toh khali chhod dein">
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Login Karein</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
