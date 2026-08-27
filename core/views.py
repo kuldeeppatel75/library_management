@@ -145,10 +145,9 @@ def setup_password_view(request):
         
         if new_password == confirm_password:
             member = MemberRegistration.objects.get(mobile=mobile)
-            member.password = make_password(new_password)  # Password ko secure hash karke save karega
+            member.password = make_password(new_password)
             member.save()
             
-            # Session saaf karke seedha dashboard bhej do
             if 'setup_mobile' in request.session:
                 del request.session['setup_mobile']
             request.session['member_id'] = member.id
@@ -157,7 +156,7 @@ def setup_password_view(request):
         else:
             return render(request, 'setup_password.html', {'error': 'Dono passwords match nahi ho rahe hain.'})
             
-    return render(request, 'setup_password_view.html') # Note: file ka naam check kar lena niche diye steps ke hisab se
+    return render(request, 'setup_password.html') # 👈 Yahan par '_view' hata dena hai # Note: file ka naam check kar lena niche diye steps ke hisab se
 
 def student_dashboard_view(request):
     member_id = request.session.get('member_id')
