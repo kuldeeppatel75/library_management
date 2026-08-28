@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 50px;">
+    <h2>Aap kahan login karna chahte hain?</h2>
+    <br>
+    <a href="{% url 'login_page' %}"><button style="padding: 10px 20px; font-size: 16px;">Student Login</button></a>
+    <br><br>
+    <a href="/admin/"><button style="padding: 10px 20px; font-size: 16px;">Admin Login</button></a>
+</div>
+{% endblock %}

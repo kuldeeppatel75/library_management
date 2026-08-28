@@ -127,7 +127,7 @@ def login_view(request):
                 request.session['member_id'] = member.id
                 return redirect('student_dashboard')
             else:
-                return render(request, 'login.html', {'error': 'Galat mobile number ya password hai.'})
+                return render(request, 'login.html', {'error': 'Apka Password Set ho chuka hai Please Password Dale.'})
                 
         except MemberRegistration.DoesNotExist:
             return render(request, 'login.html', {'error': 'Yeh mobile number registered nahi hai.'})
@@ -165,3 +165,5 @@ def student_dashboard_view(request):
         
     member = MemberRegistration.objects.get(id=member_id)
     return render(request, 'student_dashboard.html', {'member': member})
+def role_selection_view(request):
+    return render(request, 'role_selection.html')

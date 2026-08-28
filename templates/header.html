@@ -16,7 +16,9 @@
                     <a class="nav-link custom-nav-link" href="{% url 'register' %}"><i class="bi bi-person-plus-fill"></i> Registration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link custom-nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                    <!-- पुराना ऐसा कुछ होगा: href="{% url 'login_page' %}" -->
+                    <!-- इसको बदलकर ये कर दो: -->
+                    <a class="nav-link custom-nav-link" href="{% url 'role_selection' %}"><i class="bi bi-box-arrow-in-right"></i>Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link custom-nav-link" href="#"><i class="bi bi-envelope-fill"></i> Contact Us</a>
