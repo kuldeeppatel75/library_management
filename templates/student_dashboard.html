@@ -34,7 +34,7 @@
                         <!-- Left Column: Photo & Plan Badge -->
                         <div class="col-md-4 text-center mb-4 mb-md-0 border-end border-secondary">
                             {% if member.photo %}
-                                <img src="{{ member.photo.url }}" alt="Student Photo" class="rounded-circle border border-warning border-3 shadow" style="width: 140px; height: 140px; object-fit: cover;">
+                                <img src="{{member.photo.url}}" alt="Student Photo" class="rounded-circle border border-warning border-3 shadow" style="width: 140px; height: 140px; object-fit: cover;">
                             {% else %}
                                 <img src="https://via.placeholder.com/140" alt="Default Photo" class="rounded-circle border border-warning border-3 shadow" style="width: 140px; height: 140px; object-fit: cover;">
                             {% endif %}
