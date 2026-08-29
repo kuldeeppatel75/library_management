@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #0f172a !important;
+    }
+</style>
+
+<div class="container my-5" style="max-width: 440px;">
+    <div class="card p-4 p-md-5 bg-dark rounded-4 border border-secondary shadow-lg text-white">
+        
+        <!-- Professional Header -->
+        <div class="text-center mb-4">
+            <div class="mb-2 text-warning">
+                <i class="bi bi-shield-shaded fs-2"></i>
+            </div>
+            <h3 class="fw-bold mb-1 text-white">Admin <span class="text-warning">Login</span></h3>
+            <p class="text-light opacity-75 small mb-0">Enter your admin credentials</p>
+        </div>
+        
+        {% if error %}
+            <div class="alert alert-danger py-2 small mb-3 border-0 bg-danger text-white">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label text-light small fw-semibold">Username</label>
+                <input type="text" class="form-control bg-secondary text-white border-secondary shadow-none py-2" name="username" required autocomplete="off" placeholder="Enter Admin Username">
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label text-light small fw-semibold">Password</label>
+                <input type="password" class="form-control bg-secondary text-white border-secondary shadow-none py-2" name="password" required placeholder="Enter Password" autocomplete="new-password">
+            </div>
+            
+            <button type="submit" class="btn btn-warning w-100 py-2 fw-bold text-dark shadow-sm">Login Karein</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

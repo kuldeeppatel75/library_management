@@ -12,6 +12,9 @@ def register_view(request):
     if request.method == 'POST':
         # 1. Form ka saara data aur photo session me nahi, balki temporary request.FILES se pakad kar 
         # seedha database me 'Pending' (is_approved=False) save kar dete hain!
+        mobile_input = request.POST.get('mobile')
+        if MemberRegistration.objects.filter(mobile=mobile_input).exists():
+            return render(request, 'register.html', {'error': 'Is mobile number se pehle hi registration ho chuka hai!'})
         
         plan = request.POST.get('membership_plan')
         amounts = {
@@ -167,3 +170,22 @@ def student_dashboard_view(request):
     return render(request, 'student_dashboard.html', {'member': member})
 def role_selection_view(request):
     return render(request, 'role_selection.html')
+
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def admin_login_view(request):
+    if request.method == 'POST':
+        username_input = request.POST.get('username')
+        password_input = request.POST.get('password')
+        
+        # User authenticate karein
+        user = authenticate(request, username=username_input, password=password_input)
+        
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('/admin/')  # Login ke baad kahan jana hai
+        else:
+            return render(request, 'admin_login.html', {'error': 'Galat Username ya Password hai!'})
+            
+    return render(request, 'admin_login.html')
