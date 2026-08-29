@@ -112,29 +112,29 @@ def login_view(request):
     if request.method == 'POST':
         mobile = request.POST.get('mobile')
         password = request.POST.get('password')
-        
+
         try:
             member = MemberRegistration.objects.get(mobile=mobile)
-            
-            # Check karo ki admin ne approve kiya hai ya nahi
+
+            # 1. Pehle check karo ki admin ne approve kiya hai ya nahi
             if not member.is_approved:
                 return render(request, 'login.html', {'error': 'Aapka registration abhi pending hai, admin approval ka wait karein.'})
-            
-            # Agar pehli baar login kar raha hai (password set nahi hai)
+
+            # 2. Agar user ka password abhi tak set nahi hua hai
             if not member.password:
                 request.session['setup_mobile'] = mobile
                 return redirect('setup_password')
-            
-            # Agar password pehle se hai toh match karo
-            if member.password and check_password(password, member.password):
+
+            # 3. Agar password pehle se hai toh match karo
+            if check_password(password, member.password):
                 request.session['member_id'] = member.id
                 return redirect('student_dashboard')
             else:
-                return render(request, 'login.html', {'error': 'Apka Password Set ho chuka hai Please Password Dale.'})
-                
+                return render(request, 'login.html', {'error': 'Galat Password dala hai, dubara koshish karein!'})
+
         except MemberRegistration.DoesNotExist:
             return render(request, 'login.html', {'error': 'Yeh mobile number registered nahi hai.'})
-            
+
     return render(request, 'login.html')
 
 def setup_password_view(request):
@@ -189,3 +189,9 @@ def admin_login_view(request):
             return render(request, 'admin_login.html', {'error': 'Galat Username ya Password hai!'})
             
     return render(request, 'admin_login.html')
+
+
+def logout_view(request):
+    if 'member_id' in request.session:
+        del request.session['member_id']
+    return redirect('login_page')

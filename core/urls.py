@@ -10,5 +10,6 @@ urlpatterns = [
     path('dashboard/', views.student_dashboard_view, name='student_dashboard'),
     path('role-select/', views.role_selection_view, name='role_selection'),
     path('admin-login/', views.admin_login_view, name='admin_login'),
+    path('logout/', views.logout_view, name='logout'),
 ]
 
