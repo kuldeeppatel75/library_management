@@ -23,7 +23,7 @@ def register_view(request):
         # seedha database me 'Pending' (is_approved=False) save kar dete hain!
         mobile_input = request.POST.get('mobile')
         if MemberRegistration.objects.filter(mobile=mobile_input).exists():
-            return render(request, 'register.html', {'error': 'Is mobile number se pehle hi registration ho chuka hai!'})
+            return render(request, 'register.html', {'error': 'Mobile Number already registered!'})
         
         plan = request.POST.get('membership_plan')
         amounts = {
@@ -127,7 +127,7 @@ def login_view(request):
 
             # 1. Pehle check karo ki admin ne approve kiya hai ya nahi
             if not member.is_approved:
-                return render(request, 'login.html', {'error': 'Aapka registration abhi pending hai, admin approval ka wait karein.'})
+                return render(request, 'login.html', {'error': 'Your registration is pending Please wait for admin approve .'})
 
             # 2. Agar user ka password abhi tak database me set nahi hua hai
             if not member.password:
@@ -136,17 +136,17 @@ def login_view(request):
 
             # 3. Agar password field khali chhod di hai
             if not password:
-                return render(request, 'login.html', {'error': 'Kripya apna password darj karein, field khali hai!'})
+                return render(request, 'login.html', {'error': 'Please Fill the password'})
 
             # 4. Agar password match ho jata hai
             if check_password(password, member.password):
                 request.session['member_id'] = member.id
                 return redirect('student_dashboard')
             else:
-                return render(request, 'login.html', {'error': 'Galat Password dala hai, dubara koshish karein!'})
+                return render(request, 'login.html', {'error': 'Wrong Password try again!'})
 
         except MemberRegistration.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Yeh mobile number registered nahi hai.'})
+            return render(request, 'login.html', {'error': 'This Phone Number not registerd .'})
 
     return render(request, 'login.html')
 
@@ -170,7 +170,7 @@ def setup_password_view(request):
             
             return redirect('student_dashboard')
         else:
-            return render(request, 'setup_password.html', {'error': 'Dono passwords match nahi ho rahe hain.'})
+            return render(request, 'setup_password.html', {'error': 'Password does not match.'})
             
     return render(request, 'setup_password.html') # 👈 Yahan par '_view' hata dena hai # Note: file ka naam check kar lena niche diye steps ke hisab se
 
@@ -199,7 +199,7 @@ def admin_login_view(request):
             login(request, user)
             return redirect('/admin/')  # Login ke baad kahan jana hai
         else:
-            return render(request, 'admin_login.html', {'error': 'Galat Username ya Password hai!'})
+            return render(request, 'admin_login.html', {'error': 'Wrong Username or Password!'})
             
     return render(request, 'admin_login.html')
 
@@ -261,7 +261,7 @@ def contact_view(request):
         except Exception as e:
             print("Email bhejne mein error aaya:", e)
 
-        success_message = "Aapka message/complaint safalpurvak bhej diya gaya hai. Hum jald hi aapse sampark karenge!"
+        success_message = "Your Message submited successfull. we will contact you soon!"
 
     return render(request, 'contact.html', {'success_message': success_message})
 

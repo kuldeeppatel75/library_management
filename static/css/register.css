@@ -150,3 +150,6 @@ body {
     font-weight: 500;
     display: none;
 }
+.form-control::placeholder{
+    color: rgba(207, 221, 198, 0.49);
+}
