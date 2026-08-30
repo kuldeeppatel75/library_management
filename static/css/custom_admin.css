@@ -1,0 +1,128 @@
+
+   /* Elite Professional Admin Login Styling */
+    .container {
+        position: relative;
+        z-index: 2;
+        animation: fadeInContainer 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInContainer {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card.shadow {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25), 
+                    0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    .card.shadow:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 35px 60px -15px rgba(15, 23, 42, 0.3), 
+                    0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+    }
+
+    .card h3.text-center {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.5px;
+        font-size: 1.75rem;
+        background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .form-label {
+        font-weight: 600 !important;
+        color: #475569 !important;
+        font-size: 0.85rem !important;
+        margin-bottom: 0.5rem !important;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+    }
+
+    .form-control {
+        background-color: #f8fafc !important;
+        border: 2px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 0.875rem 1rem !important;
+        font-size: 0.95rem !important;
+        color: #1e293b !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .form-control::placeholder {
+        color: #94a3b8 !important;
+        font-weight: 400 !important;
+    }
+
+    .form-control:focus {
+        background-color: #ffffff !important;
+        border-color: #6366f1 !important;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 
+                    0 4px 12px rgba(99, 102, 241, 0.1) !important;
+        outline: none !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 0.875rem !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        letter-spacing: 0.05em;
+        color: #ffffff !important;
+        box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.5) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.6) !important;
+    }
+
+    .btn-primary:active {
+        transform: translateY(0) !important;
+    }
+
+    .alert-danger {
+        background: rgba(254, 226, 226, 0.95) !important;
+        border: 1px solid #f87171 !important;
+        color: #991b1b !important;
+        border-radius: 10px !important;
+        font-weight: 500 !important;
+        font-size: 0.9rem !important;
+        padding: 0.75rem 1rem !important;
+        backdrop-filter: blur(4px);
+        margin-bottom: 1.25rem !important;
+    }
+
+    .text-center.mt-3 a {
+        color: #64748b !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        transition: color 0.2s ease !important;
+        text-decoration: none !important;
+    }
+
+    .text-center.mt-3 a:hover {
+        color: #4f46e5 !important;
+        text-decoration: underline !important;
+    }
