@@ -122,10 +122,19 @@ STATICFILES_DIRS=[BASE_DIR / 'static',]
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 15 * 1024 * 1024  # 15 MB limit
+FILE_UPLOAD_MAX_MEMORY_SIZE = 15 * 1024 * 1024  # 15 MB limit
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kuldeeppate73@gmail.com'          # Yahan apna wahi Gmail daalna jisse app password banaya hai
+EMAIL_HOST_PASSWORD = 'uxde qczy ecgj znpo' # Yahan wo 16-digit ka app password daalna jo abhi mila hai
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import MemberRegistration
+from .models import ContactMessage
+
 
 def home(request):
     return render(request, 'index.html')
@@ -195,3 +197,110 @@ def logout_view(request):
     if 'member_id' in request.session:
         del request.session['member_id']
     return redirect('login_page')
+
+from django.shortcuts import render
+from .models import ContactMessage
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+def contact_view(request):
+    success_message = None
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        category = request.POST.get('category')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        # Database me save karna
+        ContactMessage.objects.create(
+            name=name,
+            mobile=mobile,
+            email=email,
+            category=category,
+            subject=subject,
+            message=message
+        )
+
+        # Email notification bhejne ka code
+        email_subject = f"Naya Message/Complaint: {subject} ({category})"
+        email_message = f"""
+        Library website par ek naya contact/query aaya hai:
+        
+        Naam: {name}
+        Mobile: {mobile}
+        Email: {email if email else 'N/A'}
+        Category: {category}
+        Subject: {subject}
+        
+        Message Details:
+        {message}
+        """
+        
+        try:
+            send_mail(
+                email_subject,
+                email_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],  # Yeh email aapke apne inbox mein aayega
+                fail_silently=False,
+            )
+        except Exception as e:
+            print("Email bhejne mein error aaya:", e)
+
+        success_message = "Aapka message/complaint safalpurvak bhej diya gaya hai. Hum jald hi aapse sampark karenge!"
+
+    return render(request, 'contact.html', {'success_message': success_message})
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        category = request.POST.get('category')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        # Database me save karna
+        ContactMessage.objects.create(
+            name=name, mobile=mobile, email=email,
+            category=category, subject=subject, message=message
+        )
+
+        # Email notification bhejne ka code
+        email_subject = f"Naya Message/Complaint: {subject} ({category})"
+        email_message = f"""
+        Library website par ek naya contact/query aaya hai:
+        
+        Naam: {name}
+        Mobile: {mobile}
+        Email: {email if email else 'N/A'}
+        Category: {category}
+        Subject: {subject}
+        
+        Message Details:
+        {message}
+        """
+        
+        try:
+            send_mail(
+                email_subject,
+                email_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print("Email bhejne mein error aaya:", e)
+
+        # Success hone ke baad naye page par redirect karna
+        return redirect('contact_success')
+
+    return render(request, 'contact.html')
+
+# Naya view success page ke liye
+def contact_success_view(request):
+    return render(request, 'contact_success.html')

@@ -1,0 +1,671 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* ================= CONTACT PAGE — PREMIUM ================= */
+
+.contact-section {
+    max-width: 950px;
+    margin: 35px auto 60px;
+    padding: 0 15px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Back Button */
+
+.contact-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 18px;
+    background: #ffffff;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    box-shadow: 0 2px 8px rgba(17,24,39,.05);
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+
+.contact-back:hover {
+    color: #4338ca;
+    border-color: #c7d2fe;
+    background: #f5f6ff;
+    transform: translateX(-3px);
+    box-shadow: 0 4px 12px rgba(67,56,202,.12);
+}
+
+
+/* Main Card */
+
+.contact-card {
+    margin-top: 18px;
+    background: #ffffff;
+    border: 1px solid #eceef2;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(17,24,39,.09), 0 2px 8px rgba(17,24,39,.04);
+}
+
+
+/* ================= HEADER ================= */
+
+.contact-top {
+    background: linear-gradient(135deg, #4338ca 0%, #4f46e5 45%, #6366f1 100%);
+    padding: 34px 38px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-top::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 120%, rgba(255,255,255,.10), transparent 55%);
+}
+
+.contact-top::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    right: -80px;
+    top: -120px;
+    filter: blur(2px);
+}
+
+.contact-top-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.contact-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.25);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+}
+
+.contact-top h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -.3px;
+}
+
+.contact-top p {
+    margin: 0;
+    font-size: 13.5px;
+    color: rgba(255,255,255,.88);
+    line-height: 1.5;
+}
+
+
+/* ================= FORM AREA ================= */
+
+.contact-body {
+    padding: 36px 40px 38px;
+}
+
+
+/* Success Message */
+
+.contact-success {
+    border-radius: 11px !important;
+    border: 1px solid #b7e4c7 !important;
+    background: #f0fbf4 !important;
+    color: #1e6b3c !important;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(30,107,60,.08);
+}
+
+
+/* Labels */
+
+.contact-label {
+    display: block;
+    color: #1f2937;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: .1px;
+    margin-bottom: 8px;
+}
+
+.contact-label i {
+    color: #4f46e5;
+    margin-right: 6px;
+}
+
+
+/* Inputs */
+
+.contact-input,
+.contact-select,
+.contact-textarea {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #111827;
+    font-size: 14px;
+    outline: none;
+    transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+
+.contact-input,
+.contact-select {
+    height: 48px;
+}
+
+.contact-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+    color: #9ca3af;
+}
+
+.contact-input:hover,
+.contact-select:hover,
+.contact-textarea:hover {
+    background: #fff;
+    border-color: #cbd2db;
+}
+
+.contact-input:focus,
+.contact-select:focus,
+.contact-textarea:focus {
+    background: #fff;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79,70,229,.12);
+}
+
+
+/* Field spacing */
+
+.contact-field {
+    margin-bottom: 22px;
+}
+
+
+/* ================= SEND BUTTON ================= */
+
+.contact-submit {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    background: linear-gradient(135deg, #4338ca, #6366f1);
+    color: #fff;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .2px;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(67,56,202,.28);
+
+    transition: all .25s cubic-bezier(.4,0,.2,1);
+}
+
+.contact-submit:hover {
+    background: linear-gradient(135deg, #3730a3, #4f46e5);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(67,56,202,.35);
+}
+
+.contact-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(67,56,202,.25);
+}
+
+
+/* ================= SUPPORT INFO ================= */
+
+.support-box {
+    margin-top: 20px;
+    background: #ffffff;
+    border: 1px solid #eceef2;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(17,24,39,.06);
+}
+
+.support-heading {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 14px;
+    letter-spacing: .1px;
+}
+
+.support-heading i {
+    color: #4f46e5;
+    margin-right: 6px;
+}
+
+.support-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+}
+
+.support-item {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+    background: #f9fafb;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid #eef0f3;
+}
+
+.support-item i {
+    margin-right: 6px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 767px) {
+
+    .contact-section {
+        margin-top: 20px;
+    }
+
+    .contact-top {
+        padding: 26px 22px;
+    }
+
+    .contact-top h2 {
+        font-size: 21px;
+    }
+
+    .contact-top p {
+        line-height: 1.5;
+    }
+
+    .contact-icon {
+        width: 48px;
+        min-width: 48px;
+        height: 48px;
+        font-size: 21px;
+    }
+
+    .contact-body {
+        padding: 26px 22px 30px;
+    }
+
+    .support-items {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .contact-top-content {
+        gap: 10px;
+    }
+
+    .contact-icon {
+        display: none;
+    }
+
+    .contact-body {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+</style>
+
+
+<div class="contact-section">
+
+    <!-- Back Button -->
+
+    <a href="javascript:history.back()" class="contact-back">
+        <i class="bi bi-arrow-left"></i>
+        Back
+    </a>
+
+
+    <!-- Main Contact Card -->
+
+    <div class="contact-card">
+
+
+        <!-- Header -->
+
+        <div class="contact-top">
+
+            <div class="contact-top-content">
+
+                <div class="contact-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Get in Touch & Support
+                    </h2>
+
+                    <p>
+                        Koi bhi samasya, sujhav ya shikayat ho toh niche form bharkar humein bhejein.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Form Body -->
+
+        <div class="contact-body">
+
+
+            {% if success_message %}
+
+                <div class="alert alert-success alert-dismissible fade show contact-success"
+                     role="alert">
+
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    {{ success_message }}
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- Name + Mobile -->
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="contact-field">
+
+                            <label class="contact-label">
+
+                                <i class="bi bi-person"></i>
+                                Full Name
+
+                            </label>
+
+                            <input
+                                type="text"
+                                class="contact-input"
+                                name="name"
+                                placeholder="Apna naam likhein"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="contact-field">
+
+                            <label class="contact-label">
+
+                                <i class="bi bi-telephone"></i>
+                                Mobile Number
+
+                            </label>
+
+                            <input
+                                type="tel"
+                                class="contact-input"
+                                name="mobile"
+                                placeholder="10-digit mobile number"
+                                pattern="[0-9]{10}"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email + Category -->
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="contact-field">
+
+                            <label class="contact-label">
+
+                                <i class="bi bi-envelope"></i>
+                                Email Address
+
+                                <span class="text-muted fw-normal"
+                                      style="font-size:12px;">
+                                    (Optional)
+                                </span>
+
+                            </label>
+
+                            <input
+                                type="email"
+                                class="contact-input"
+                                name="email"
+                                placeholder="name@example.com"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="contact-field">
+
+                            <label class="contact-label">
+
+                                <i class="bi bi-list-nested"></i>
+                                Select Category
+
+                            </label>
+
+                            <select
+                                class="contact-select"
+                                name="category"
+                                required
+                            >
+
+                                <option value="" selected disabled>
+                                    -- Choose Category --
+                                </option>
+
+                                <option value="General">
+                                    General Inquiry
+                                </option>
+
+                                <option value="Membership">
+                                    Membership Issue
+                                </option>
+
+                                <option value="Payment">
+                                    Payment / UTR Problem
+                                </option>
+
+                                <option value="Complaint">
+                                    Complaint / Feedback
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Subject -->
+
+                <div class="contact-field">
+
+                    <label class="contact-label">
+
+                        <i class="bi bi-tag"></i>
+                        Subject
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="contact-input"
+                        name="subject"
+                        placeholder="Kis vishay ke baare mein baat karni hai?"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Message -->
+
+                <div class="contact-field">
+
+                    <label class="contact-label">
+
+                        <i class="bi bi-chat-left-text"></i>
+                        Message / Complaint Details
+
+                    </label>
+
+                    <textarea
+                        class="contact-textarea"
+                        name="message"
+                        rows="4"
+                        placeholder="Apni samasya ya sujhav vistar se likhein..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SEND MESSAGE -->
+
+                <button
+                    type="submit"
+                    class="contact-submit"
+                >
+
+                    <i class="bi bi-send-fill"></i>
+
+                    Send Message
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Library Support Info Box -->
+
+    <div class="support-box">
+
+        <div class="support-heading">
+            <i class="bi bi-headset"></i>
+            Library Support
+        </div>
+
+
+        <div class="support-items">
+
+            <div class="support-item">
+
+                <i class="bi bi-geo-alt-fill text-danger"></i>
+
+                Library Address: Main Market, Near City Center
+
+            </div>
+
+
+            <div class="support-item">
+
+                <i class="bi bi-telephone-fill text-success"></i>
+
+                Helpline: +91 9876543210
+
+            </div>
+
+
+            <div class="support-item">
+
+                <i class="bi bi-envelope-fill text-primary"></i>
+
+                support@library.com
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
