@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import MemberRegistration
 from .models import ContactMessage
+from django.contrib.auth import authenticate, login
 
 
 def home(request):
@@ -327,3 +328,54 @@ def custom_logout(request):
     from django.contrib.auth import logout
     logout(request)
     return redirect('home')
+
+
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required(login_url='admin_login')
+def admin_dashboard_view(request):
+    approved_count = MemberRegistration.objects.filter(is_approved=True).count()
+    pending_count = MemberRegistration.objects.filter(is_approved=False).count()
+    context = {
+        'approved_count': approved_count,
+        'pending_count': pending_count,
+    }
+    return render(request, 'admin_dashboard.html', context)
+
+@staff_member_required(login_url='admin_login')
+def admin_approved_view(request):
+    approved_members = MemberRegistration.objects.filter(is_approved=True)
+    return render(request, 'admin_approved.html', {'members': approved_members})
+
+@staff_member_required(login_url='admin_login')
+def admin_pending_view(request):
+    pending_members = MemberRegistration.objects.filter(is_approved=False)
+    return render(request, 'admin_pending.html', {'members': pending_members})
+
+@staff_member_required(login_url='admin_login')
+def admin_action_view(request, member_id, action):
+    try:
+        member = MemberRegistration.objects.get(id=member_id)
+        if action == 'approve':
+            member.is_approved = True
+            member.save()
+        elif action == 'delete':
+            member.delete()
+    except MemberRegistration.DoesNotExist:
+        pass
+    
+    if action == 'approve':
+        return redirect('admin_pending')
+    return redirect('admin_approved')
+
+def custom_admin_login_view(request):
+    if request.method == 'POST':
+        username_input = request.POST.get('username')
+        password_input = request.POST.get('password')
+        user = authenticate(request, username=username_input, password=password_input)
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin_dashboard')
+        else:
+            return render(request, 'custom_admin_login.html', {'error': 'Wrong Username or Password / Not Staff'})
+    return render(request, 'custom_admin_login.html')

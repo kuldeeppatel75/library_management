@@ -15,6 +15,11 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact_us'),
     path('contact/success', views.contact_success_view, name='contact_success'),
     path('logout/', views.custom_logout, name='logout'),
+    path('admin-dashboard/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('admin-approved/', views.admin_approved_view, name='admin_approved'),
+    path('admin-pending/', views.admin_pending_view, name='admin_pending'),
+    path('admin-action/<int:member_id>/<str:action>/', views.admin_action_view, name='admin_action'),
+    path('custom-admin-login/', views.custom_admin_login_view, name='custom_admin_login'),
     
 ]
 
