@@ -4,7 +4,14 @@ from .models import ContactMessage
 
 
 def home(request):
-    return render(request, 'index.html')
+    # Database se sirf wahi members gin rahe hain jinka is_approved True (approved) hai
+    approved_count = MemberRegistration.objects.filter(is_approved=True).count()
+    
+    context = {
+        'approved_count': approved_count,
+    }
+    return render(request, 'index.html', context)
+    
 
 def register_view(request):
     return render(request, 'register.html')
@@ -77,7 +84,7 @@ def payment_view(request):
             
             return render(request, 'success_pending.html')
             
-    return render(request, 'payment.html', {'amount': amount})
+        return render(request, 'payment.html', {'amount': amount})
     amount = request.session.get('amount', 500)
     
     if request.method == 'POST':
@@ -122,12 +129,16 @@ def login_view(request):
             if not member.is_approved:
                 return render(request, 'login.html', {'error': 'Aapka registration abhi pending hai, admin approval ka wait karein.'})
 
-            # 2. Agar user ka password abhi tak set nahi hua hai
+            # 2. Agar user ka password abhi tak database me set nahi hua hai
             if not member.password:
                 request.session['setup_mobile'] = mobile
                 return redirect('setup_password')
 
-            # 3. Agar password pehle se hai toh match karo
+            # 3. Agar password field khali chhod di hai
+            if not password:
+                return render(request, 'login.html', {'error': 'Kripya apna password darj karein, field khali hai!'})
+
+            # 4. Agar password match ho jata hai
             if check_password(password, member.password):
                 request.session['member_id'] = member.id
                 return redirect('student_dashboard')
@@ -304,3 +315,15 @@ def contact_view(request):
 # Naya view success page ke liye
 def contact_success_view(request):
     return render(request, 'contact_success.html')
+
+
+from django.shortcuts import redirect
+
+def custom_logout(request):
+    # Session se user ka data hata rahe hain
+    if 'pending_reg_id' in request.session:
+        del request.session['pending_reg_id']
+    # Agar Django auth use kiya hai toh logout() bhi kar sakte hain
+    from django.contrib.auth import logout
+    logout(request)
+    return redirect('home')
