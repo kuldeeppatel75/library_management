@@ -379,3 +379,7 @@ def custom_admin_login_view(request):
         else:
             return render(request, 'custom_admin_login.html', {'error': 'Wrong Username or Password / Not Staff'})
     return render(request, 'custom_admin_login.html')
+
+def student_login():
+    custom_admin_login_view()
+    

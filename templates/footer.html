@@ -1,0 +1,54 @@
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock  %}
+<footer class="premium-footer mt-auto">
+    <div class="footer-glow"></div>
+    <div class="container py-5 relative-z">
+        <div class="row g-5">
+            <!-- Brand Section -->
+            <div class="col-lg-4 col-md-6">
+                <h4 class="footer-brand"><i class="bi bi-book-half me-2 icon-gradient"></i>Library Pro</h4>
+                <p class="footer-text mt-3">
+                    Next-generation library management system. Seamless, secure, and designed for modern educational institutions.
+                </p>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="col-lg-4 col-md-6">
+                <h5 class="footer-heading">Quick Links</h5>
+                <ul class="list-unstyled footer-links-list mt-3">
+                    <li><a href="{% url 'home' %}" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+                    <li><a href="{% url 'login_page' %}" class="footer-link"><i class="bi bi-chevron-right"></i> Student Portal</a></li>
+                    <li><a href="{% url 'custom_admin_login' %}" class="footer-link"><i class="bi bi-chevron-right"></i> Admin Access</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact & Social -->
+            <div class="col-lg-4 col-md-12">
+                <h5 class="footer-heading">Connect With Us</h5>
+                <div class="contact-info mt-3">
+                    <p><i class="bi bi-envelope-at-fill icon-gradient me-2"></i> support@librarypro.com</p>
+                    <p><i class="bi bi-telephone-fill icon-gradient me-2"></i> +91 98765 43210</p>
+                </div>
+                <div class="social-wrapper mt-4">
+                    <a href="#" class="social-btn"><i class="bi bi-github"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <!-- Copyright Bottom -->
+        <div class="row align-items-center pt-3 pb-2">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="copyright-text mb-0">&copy; 2026 Library Pro. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                <p class="copyright-text mb-0">Crafted with <i class="bi bi-heart-fill text-danger mx-1"></i> for excellence</p>
+            </div>
+        </div>
+    </div>
+</footer>

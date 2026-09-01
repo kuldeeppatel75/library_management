@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+{% endblock  %}
 
 {% block content %}
 <!-- Load Page Specific CSS -->
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 <!-- Include Modular Hero Section -->
 {% include 'hero.html' %}
-
 <!-- Statistics / Feature Cards Row -->
 <div class="container">
     <div class="row g-4 mt-4 mb-5">
