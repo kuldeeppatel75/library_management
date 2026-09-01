@@ -1,0 +1,166 @@
+/* ================================================================= */
+/* Multi-Image Pure CSS Smooth Fade Carousel (Local Images Fix)      */
+/* ================================================================= */
+
+body {
+    background-color: #030712;
+}
+
+.hero-bg-carousel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -999;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: #030712;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.35) contrast(1.1);
+    opacity: 0;
+    animation: smoothFadeAnimation 18s infinite;
+}
+
+/* Yahan apni khud ki local images ke path de de (e.g., images/lib1.jpg) */
+.hero-slide.img-1 {
+    background-image: url('../images/lib1.jpg'); 
+    animation-delay: 0s;
+}
+
+.hero-slide.img-2 {
+    background-image: url('../images/lib2.jpg'); 
+    animation-delay: 6s;
+}
+
+.hero-slide.img-3 {
+    background-image: url('../images/lib3.jpg'); 
+    animation-delay: 12s;
+}
+
+@keyframes smoothFadeAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    33% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    43% {
+        opacity: 0;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+}
+
+/* Content Container Positioning */
+.hero-content-container {
+    position: relative;
+    z-index: 2;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #cbd5e1;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    max-width: 600px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero-glass-badge {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hero-glass-badge h4 {
+    color: #ffffff !important;
+}
+
+.hero-glass-badge p {
+    color: #94a3b8 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-glass-badge:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 219, 222, 0.5);
+}
+
+.pro-btn {
+    background: linear-gradient(135deg, #00dbde 0%, #005f73 100%);
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 219, 222, 0.4);
+}
+
+.pro-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(0, 219, 222, 0.6);
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .hero-content-container {
+        text-align: center;
+        padding-top: 40px;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

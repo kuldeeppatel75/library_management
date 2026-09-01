@@ -1,0 +1,44 @@
+    .social-floating-box {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        /* Yahan animation lagaya hai jo page khulte hi chalega */
+        animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes slideInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(50px) scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+    }
+    .social-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        color: white;
+    }
+    .whatsapp { background-color: #25d366; }
+    .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df4996 45%, #8f00ff 90%); }
+    .linkedin { background-color: #0a66c2; }
