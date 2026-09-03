@@ -47,6 +47,10 @@ body {
     animation-delay: 12s;
 }
 
+.hero-slide.img-4 {
+    background-image: url('../images/lib4.jpg'); 
+    animation-delay: 12s;
+}
 @keyframes smoothFadeAnimation {
     0% {
         opacity: 0;
