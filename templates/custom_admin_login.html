@@ -21,11 +21,11 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" required placeholder="Enter admin username">
+                            <input type="text" name="username" class="form-control" required placeholder="Enter admin username" required autocomplete="off" >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required placeholder="Enter password">
+                            <input type="password" name="password" class="form-control" required placeholder="Enter password" autocomplete="new-password">
                         </div>
                         <button type="submit" class="btn btn-primary w-100 py-2">Login to Dashboard</button>
                     </form>

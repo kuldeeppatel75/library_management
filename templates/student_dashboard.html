@@ -1,87 +1,115 @@
-{% extends "base.html" %}
-{% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
-{% endblock  %}
-{% block content %}
-
-    <div class="container py-5">
-        <!-- Top Header Row -->
-        <div class="row mb-4 align-items-center">
-            <div class="col">
-                <h3 class="fw-bold text-warning mb-0"><i class="bi bi-speedometer2"></i> Student Dashboard</h3>
-                <p class="text-muted small mb-0">Welcome back, {{ member.first_name }}!</p>
-            </div>
-            <div class="col text-end">
-                <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Main Profile Card -->
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <div class="card bg-secondary bg-opacity-25 border-secondary shadow-lg rounded-4 p-4 text-white">
-                    <div class="row align-items-center">
-                        
-                        <!-- Left Column: Photo & Plan Badge -->
-                        <div class="col-md-4 text-center mb-4 mb-md-0 border-end border-secondary">
-                            {% if member.photo %}
-                                <img src="{{member.photo.url}}" alt="Student Photo" class="rounded-circle border border-warning border-3 shadow" style="width: 140px; height: 140px; object-fit: cover;">
-                            {% else %}
-                                <img src="https://via.placeholder.com/140" alt="Default Photo" class="rounded-circle border border-warning border-3 shadow" style="width: 140px; height: 140px; object-fit: cover;">
-                            {% endif %}
-                            
-                            <h4 class="mt-3 mb-1 fw-bold">{{ member.first_name }} {{ member.last_name }}</h4>
-                            <span class="badge bg-warning text-dark px-3 py-2 fw-bold rounded-pill shadow-sm">
-                                <i class="bi bi-star-fill"></i> {{ member.membership_plan|upper }} PLAN
-                            </span>
-                        </div>
-
-                        <!-- Right Column: Biodata/Details -->
-                        <div class="col-md-8 ps-md-4">
-                            <h6 class="text-warning text-uppercase fw-bold mb-3 border-bottom border-secondary pb-2">
-                                <i class="bi bi-person-badge"></i> Personal Details
-                            </h6>
-                            
-                            <div class="row mb-2">
-                                <div class="col-4 text-muted small fw-semibold">Father's Name:</div>
-                                <div class="col-8 fw-semibold">{{ member.father_name }}</div>
-                            </div>
-                            
-                            <div class="row mb-2">
-                                <div class="col-4 text-muted small fw-semibold">Mobile Number:</div>
-                                <div class="col-8 fw-semibold">{{ member.mobile }}</div>
-                            </div>
-                            
-                            <div class="row mb-2">
-                                <div class="col-4 text-muted small fw-semibold">Address:</div>
-                                <div class="col-8 fw-semibold">{{ member.address }}</div>
-                            </div>
-                            
-                            <div class="row mb-2">
-                                <div class="col-4 text-muted small fw-semibold">Fee Paid:</div>
-                                <div class="col-8 fw-semibold text-success">₹{{ member.amount }}</div>
-                            </div>
-                            
-                            <div class="row mb-2">
-                                <div class="col-4 text-muted small fw-semibold">Status:</div>
-                                <div class="col-8">
-                                    {% if member.is_approved %}
-                                        <span class="badge bg-success px-2 py-1">Approved</span>
-                                    {% else %}
-                                        <span class="badge bg-warning text-dark px-2 py-1">Pending Approval</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+{% extends "base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}" />
+{% endblock %} {% block content %}
+<div class="container py-5 dashboard-container">
+  <!-- Top Header Row -->
+  <div class="row mb-4 align-items-center dashboard-header">
+    <div class="col">
+      <h3 class="fw-bold dashboard-title mb-1">
+        <i class="bi bi-speedometer2 me-2"></i>Student Dashboard
+      </h3>
+      <p class="dashboard-welcome mb-0">
+        Welcome back, <span>{{ member.first_name }}</span>!
+      </p>
     </div>
+    <div class="col text-end">
+      <form action="{% url 'logout' %}" method="post" style="display: inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-logout">
+          <i class="bi bi-box-arrow-right me-1"></i>Logout
+        </button>
+      </form>
+    </div>
+  </div>
 
+  <!-- Main Profile Card -->
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card profile-card border-0">
+        <div class="row align-items-center g-0">
+          <!-- Left Column: Photo & Plan Badge -->
+          <div class="col-md-4 text-center p-4 profile-left-col">
+            <div class="profile-avatar-wrapper mb-3">
+              {% if member.photo %}
+              <img
+                src="{{ member.photo.url }}"
+                alt="Student Photo"
+                class="profile-avatar"
+              />
+              {% else %}
+              <img
+                src="https://via.placeholder.com/140"
+                alt="Default Photo"
+                class="profile-avatar"
+              />
+              {% endif %}
+            </div>
+            <h4 class="fw-bold student-name mb-2">
+              {{ member.first_name }} {{ member.last_name }}
+            </h4>
+
+            <!-- Fixed Django Tag Below -->
+            <span class="badge badge-plan">
+              <i class="bi bi-star-fill me-1"></i>{{ member.membership_plan|upper }} PLAN
+            </span>
+          </div>
+
+          <!-- Right Column: Biodata/Details -->
+          <div class="col-md-8 p-4 profile-right-col">
+            <h6 class="section-heading mb-4">
+              <i class="bi bi-person-badge me-2"></i>Personal Details
+            </h6>
+
+            <div class="info-grid">
+              <div class="info-row">
+                <div class="info-label">
+                  <i class="bi bi-person me-2"></i>Father's Name:
+                </div>
+                <div class="info-value">{{ member.father_name }}</div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">
+                  <i class="bi bi-telephone me-2"></i>Mobile Number:
+                </div>
+                <div class="info-value">{{ member.mobile }}</div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">
+                  <i class="bi bi-geo-alt me-2"></i>Address:
+                </div>
+                <div class="info-value">{{ member.address }}</div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">
+                  <i class="bi bi-currency-rupee me-2"></i>Fee Paid:
+                </div>
+                <div class="info-value text-amount">₹{{ member.amount }}</div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">
+                  <i class="bi bi-shield-check me-2"></i>Status:
+                </div>
+                <div class="info-value">
+                  {% if member.is_approved %}
+                  <span class="badge status-badge badge-approved"
+                    >Approved</span
+                  >
+                  {% else %}
+                  <span class="badge status-badge badge-pending"
+                    >Pending Approval</span
+                  >
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
