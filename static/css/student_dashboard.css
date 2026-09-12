@@ -6,33 +6,35 @@
     max-width: 1000px !important;
 }
 
+
 /* Header Section */
 .dashboard-title {
-    color: #f8fafc !important;
+    color: #0873de !important;
     font-size: 1.8rem !important;
     display: flex !important;
     align-items: center !important;
 }
 
 .dashboard-title i {
-    color: #38bdf8 !important;
+    color: #f83838 !important;
 }
 
 .dashboard-welcome {
-    color: #94a3b8 !important;
+    color: #030303 !important;
     font-size: 1rem !important;
 }
 
 .dashboard-welcome span {
-    color: #f1f5f9 !important;
+    color: #000000 !important;
     font-weight: 600 !important;
+    font-style: bold;
 }
 
 /* Logout Button */
 .btn-logout {
-    background: rgba(239, 68, 68, 0.15) !important;
+    background: rgba(93, 161, 210, 0.653) !important;
     border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    color: #fca5a5 !important;
+    color: #e41d1d !important;
     font-weight: 600 !important;
     padding: 8px 18px !important;
     border-radius: 10px !important;
