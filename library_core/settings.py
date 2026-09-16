@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,3 +139,13 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kuldeeppate73@gmail.com'          # Yahan apna wahi Gmail daalna jisse app password banaya hai
 EMAIL_HOST_PASSWORD = 'uxde qczy ecgj znpo' # Yahan wo 16-digit ka app password daalna jo abhi mila hai
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
